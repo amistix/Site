@@ -7,11 +7,27 @@
     <meta http-equiv='cache-control' content='no-cache'> 
     <meta http-equiv='expires' content='0'> 
     <meta http-equiv='pragma' content='no-cache'>
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
 <body>
+    <div class="preloader" id="preloader">
+        <div class="terminal-loader">
+            <div class="terminal-header hold-to-move">
+                <div class="terminal-title">Status</div>
+                    <div class="terminal-controls">
+                        <div class="control close"></div>
+                        <div class="control minimize"></div>
+                        <div class="control maximize"></div>
+                    </div>
+                </div>
+            <div class="text">Loading...</div>
+        </div>
+    </div>      
     <div>
-        Hallo world
-        <section id="projects"></section>
+        <div>
+            <p class="hold-to-move"><b>U may also check my other projects</b></p>
+            <div id="repos-frame"></div>
+        </div>
         <script src="static/js/index.js"></script>
     </div>
 </body>
