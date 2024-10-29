@@ -42,7 +42,8 @@
 
 .terminal-loader {
     position: absolute;
-
+    top: 30vh;
+    left: 40vw;
     border: 0.1em solid #333;
     background-color: #1a1a1a;
     color: #0f0;
@@ -50,7 +51,6 @@
     font-size: 1em;
     padding: 1.5em 1em;
     width: 12em;
-    margin: 100px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     box-sizing: border-box;
