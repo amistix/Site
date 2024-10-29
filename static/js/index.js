@@ -1,5 +1,5 @@
 async function FetchRepo() {
-    var req = await fetch("https://github.com/amistix?tab=repositories",{
+    var req = await fetch("https://api.github.com/search/repositories?q=@amistix",{
         headers:{
             Accept: "application/vnd.github.v3+json",
         }
