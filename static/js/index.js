@@ -1,23 +1,28 @@
 "use strict"
 
-const movableElements = document.getElementsByClassName("hold-to-move")[0];
-const preloader = document.getElementById("preloader");
 var offsetX, offsetY;
+var currentMovable;
+const preloader = document.getElementById("preloader");
+const movableElements = document.getElementsByClassName("hold-to-move");
 
-movableElements.addEventListener("mousedown",(event) => {
-    offsetX = event.offsetX;
-    offsetY = event.offsetY;
-    document.body.addEventListener("mousemove",moveElement, { passive: false });
-});
+for(let i = 0; i < movableElements.length; i++)
+{
+    movableElements[i].addEventListener("mousedown",(event) => {
+        offsetX = event.offsetX;
+        offsetY = event.offsetY;
+        currentMovable = movableElements[i];
+        document.body.addEventListener("mousemove",moveElement, { passive: false });
+    });
 
-movableElements.addEventListener("mouseup",(event) => {
-    document.body.removeEventListener("mousemove", moveElement, { passive: true });
-});
+    movableElements[i].addEventListener("mouseup",(event) => {
+        document.body.removeEventListener("mousemove", moveElement, { passive: true });
+    });
+}
 
 function moveElement(e)
 {
-    movableElements.parentElement.style.left = `calc(${e.clientX}px - ${offsetX}px)`;//
-    movableElements.parentElement.style.top = `calc(${e.clientY}px  - 100px - ${offsetY}px)`;//+${e.target.offsetParent.offsetTop}px
+    currentMovable.parentElement.style.left = `calc(${e.clientX}px - ${offsetX}px)`;
+    currentMovable.parentElement.style.top = `calc(${e.clientY}px  - ${offsetY}px)`;
 }
 
 
@@ -63,7 +68,9 @@ async function LoadPage()
         repo_frame.appendChild(createElement("div").attr("class", "repo-frame").textContent(`${repo.name}`).toDOM());
     });
     setTimeout(
-        () => {preloader.classList.add("done");}, 2000
+        () => {
+          preloader.classList.add("done");
+        }, 2000
     )
     
 }
