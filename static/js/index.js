@@ -1,39 +1,12 @@
 "use strict"
+document.addEventListener('keydown', keyDown, false)
 
-var offsetX, offsetY;
-var currentMovable;
-var layer = 1;
 const preloader = document.getElementById("preloader");
-const movableElements = document.getElementsByClassName("hold-to-move");
 
-for(let i = 0; i < movableElements.length; i++)
-{
-  setMovable(movableElements[i]);
-}
-
-function setMovable(el)
-{
-  el.addEventListener("mousedown",(event) => {
-    offsetX = event.offsetX;
-    offsetY = event.offsetY;
-    currentMovable = el;
-    currentMovable.parentElement.style.zIndex = ++layer;
-    document.body.addEventListener("mousemove",moveElement, { passive: false });
-  });
-
-  el.addEventListener("mouseup",(event) => {
-    document.body.removeEventListener("mousemove", moveElement, { passive: true });
-  });
-
-  el.addEventListener("mouseleave",(event) => {
-    document.body.removeEventListener("mousemove", moveElement, { passive: true });
-  });
-}
-
-function moveElement(e)
-{
-  currentMovable.parentElement.style.left = `calc(${e.pageX}px - ${offsetX}px)`;
-  currentMovable.parentElement.style.top = `calc(${e.pageY}px  - ${offsetY}px)`;
+function keyDown(e){
+  if((e.ctrlKey)&&(e.keyCode == 84)&&(e.altKey)){
+    createTerminal();
+  }
 }
 
 function createTerminal(header_title = "Terminal")
