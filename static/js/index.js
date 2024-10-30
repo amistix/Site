@@ -2,39 +2,61 @@
 
 var offsetX, offsetY;
 var currentMovable;
+var layer = 1;
 const preloader = document.getElementById("preloader");
 const movableElements = document.getElementsByClassName("hold-to-move");
 
 for(let i = 0; i < movableElements.length; i++)
 {
-    movableElements[i].addEventListener("mousedown",(event) => {
-        offsetX = event.offsetX;
-        offsetY = event.offsetY;
-        currentMovable = movableElements[i];
-        document.body.addEventListener("mousemove",moveElement, { passive: false });
-    });
+  setMovable(movableElements[i]);
+}
 
-    movableElements[i].addEventListener("mouseup",(event) => {
-        document.body.removeEventListener("mousemove", moveElement, { passive: true });
-    });
+function setMovable(el)
+{
+  el.addEventListener("mousedown",(event) => {
+    offsetX = event.offsetX;
+    offsetY = event.offsetY;
+    currentMovable = el;
+    currentMovable.parentElement.style.zIndex = ++layer;
+    document.body.addEventListener("mousemove",moveElement, { passive: false });
+  });
+
+  el.addEventListener("mouseup",(event) => {
+    document.body.removeEventListener("mousemove", moveElement, { passive: true });
+  });
+
+  el.addEventListener("mouseleave",(event) => {
+    document.body.removeEventListener("mousemove", moveElement, { passive: true });
+  });
 }
 
 function moveElement(e)
 {
-    currentMovable.parentElement.style.left = `calc(${e.clientX}px - ${offsetX}px)`;
-    currentMovable.parentElement.style.top = `calc(${e.clientY}px  - ${offsetY}px)`;
+  currentMovable.parentElement.style.left = `calc(${e.pageX}px - ${offsetX}px)`;
+  currentMovable.parentElement.style.top = `calc(${e.pageY}px  - ${offsetY}px)`;
 }
 
-
-async function FetchRepos()
+function createTerminal(header_title = "Terminal")
 {
-    const req = await fetch("https://api.github.com/search/repositories?q=@amistix",{
-        headers:{
-            Accept: "application/vnd.github.v3+json",
-        }
-    });
-    const result = await req.json();
-    return result.items;
+  const terminal_body = createElement("div").attr("class","console").css("width", "400px").css("height", "300px").toDOM();
+  const terminal_header = createElement("div").attr("class","console-header hold-to-move").toDOM();
+  const terminal_title = createElement("div").attr("class","console-title").textContent(`${header_title}`).toDOM();
+  terminal_header.appendChild(terminal_title);
+  terminal_body.appendChild(terminal_header);
+
+  setMovable(terminal_header);
+  document.body.appendChild(terminal_body);
+}
+
+async function fetchRepos()
+{
+  const req = await fetch("https://api.github.com/search/repositories?q=@amistix",{
+    headers:{
+      Accept: "application/vnd.github.v3+json",
+    }
+  });
+  const result = await req.json();
+  return result.items;
 }
 
 function createElement(type) 
@@ -60,19 +82,19 @@ function createElement(type)
   };
 }
 
-async function LoadPage()
+async function loadPage()
 {
-    const repos = await FetchRepos();
-    const repo_frame = document.getElementById("repos-frame");
-    repos.forEach(repo => {
-        repo_frame.appendChild(createElement("div").attr("class", "repo-frame").textContent(`${repo.name}`).toDOM());
-    });
-    setTimeout(
-        () => {
-          preloader.classList.add("done");
-        }, 2000
-    )
-    
+  const repos = await fetchRepos();
+  const repo_frame = document.getElementById("repos-frame");
+  repos.forEach(repo => {
+    repo_frame.appendChild(createElement("div").attr("class", "repo-frame").attr('onclick',`window.open("${repo.svn_url}")`).textContent(`${repo.name}`).toDOM());
+  });
+  setTimeout(
+    () => {
+      preloader.classList.add("done");
+      document.getElementsByClassName('text')[0].innerHTML = "$Successfuly!";
+    }, 1000
+  )
 }
 
-LoadPage();
+loadPage();

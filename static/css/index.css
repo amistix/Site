@@ -3,15 +3,33 @@
     font-family: "PT Sans", sans-serif;
 }
 
+body {
+    background: url("https://images.hdqwalls.com/wallpapers/kali-linux-dragon-4k-zz.jpg");
+    background-size: cover;
+}
+
+.repo-frame {
+    color:#fff;
+}
+
+.repo-frame:hover {
+    cursor: pointer;
+    color: rgb(170, 211, 255);
+    text-decoration: underline;
+}
 
 .console {
     position: absolute;
     border: 0.1em solid #333;
-    width:50vw;
-    height: 50vh;
     background-color: #1a1a1a;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+}
+
+.console-title {
+    color: #fff;
+    margin-left: 1em;
+    user-select: none;
 }
 
 .console-header {
@@ -23,7 +41,6 @@
     background-color: #333;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    padding: 0 0.4em;
     box-sizing: border-box;
     user-select: none;
 }

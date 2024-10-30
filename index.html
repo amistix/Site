@@ -11,25 +11,22 @@
     <link rel="stylesheet" href="static/css/loader.css">
 </head>
 <body>
-    <div class="preloader" id="preloader">
-        <div class="terminal-loader">
-            <div class="terminal-header hold-to-move">
-                <div class="terminal-title">Status</div>
-                    <div class="terminal-controls">
-                        <div class="control close"></div>
-                        <div class="control minimize"></div>
-                        <div class="control maximize"></div>
-                    </div>
-                </div>
-            <div class="text">$Loading...</div>
+    <div class="preloader" id="preloader"></div>     
+    <div class="terminal-loader">
+        <div class="terminal-header hold-to-move">
+            <div class="terminal-title">Status</div>
+            <div class="terminal-controls">
+                <div class="control close"></div>
+                <div class="control minimize"></div>
+                <div class="control maximize"></div>
+            </div>
         </div>
-    </div>      
+        <div class="text">$Loading...</div>
+    </div> 
+    <button onclick="createTerminal()">Click me to open Terminal</button>
     <div>
-        <div class="console">
-            <div class="console-header hold-to-move"></div>
-        </div>
         <div>
-            <p class="hold-to-move"><b>U may also check my other projects</b></p>
+            <p style="color:#fff;"><b>U may also check my other projects</b></p>
             <div id="repos-frame"></div>
         </div>
         <script src="static/js/index.js"></script>

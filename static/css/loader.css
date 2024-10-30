@@ -28,7 +28,7 @@
     height: 100vh;
     display: inline;
     opacity: 1;
-    z-index: 99;
+    z-index: 0;
 
     &.done {
         transition: all ease-out 0.5s;
