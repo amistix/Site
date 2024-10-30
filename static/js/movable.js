@@ -3,12 +3,9 @@
 var layer = 1;
 var offsetX, offsetY;
 var currentMovable;
-const movableElements = document.getElementsByClassName("hold-to-move");
+const loadingConsole = document.getElementById("loading-console");
+setMovable(loadingConsole);
 
-for(let i = 0; i < movableElements.length; i++)
-{
-  setMovable(movableElements[i]);
-}
 
 function setMovable(el)
 {
@@ -21,12 +18,14 @@ function setMovable(el)
   });
 
   el.addEventListener("mouseup",(event) => {
+    currentMovable.style.cursor = "grab";
     document.removeEventListener("mousemove", moveElement, { passive: true });
   });
 }
 
 function moveElement(e)
 {
+  document.body.style.cursor = "grabing";
   currentMovable.parentElement.style.left = `calc(${e.pageX}px - ${offsetX}px)`;
   currentMovable.parentElement.style.top = `calc(${e.pageY}px  - ${offsetY}px)`;
 }
