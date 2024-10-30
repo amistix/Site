@@ -3,10 +3,43 @@
     font-family: "PT Sans", sans-serif;
 }
 
+@keyframes blinkCursor {
+    50% {
+      border-right-color: transparent;
+    }
+}
+  
+@keyframes typeAndDelete {
+    0%,
+    10% {
+      width: 0;
+    }
+    45%,
+    55% {
+      width: 6.2em;
+    } /* adjust width based on content */
+    90%,
+    100% {
+      width: 0;
+    }
+}
+
 html {
     margin: 0;
     width: 100%;
     height: 100%;
+}
+
+.text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #0f0;
+    border-right: 0.2em solid green; /* Cursor */
+    animation: typeAndDelete 4s steps(11) infinite,
+      blinkCursor 0.5s step-end infinite alternate;
+    margin-left: 1em;
+    margin-top: 1.5em;
 }
 
 body {
@@ -25,7 +58,7 @@ body {
 }
 
 .console {
-    transition: opacity ease-out 1s;
+    transition: opacity ease-out 0.2s;
     opacity: 1;
     position: absolute;
     border: 0.1em solid #333;
@@ -48,7 +81,6 @@ body {
 }
 
 .console-header {
-    position: absolute;
     cursor: grab;
     top: 0;
     left: 0;

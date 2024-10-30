@@ -12,25 +12,15 @@
 </head>
 <body>
     <div class="preloader" id="preloader"></div>     
-    <div class="terminal-loader">
-        <div class="terminal-header" id="loading-console">
-            <div class="terminal-title">Status</div>
-            <div class="terminal-controls">
-                <div class="control minimize"></div>
-                <div class="control maximize"></div>
-                <div class="control close"></div>
-            </div>
-        </div>
-        <div class="text">$Loading...</div>
-    </div> 
-    <button onclick="createTerminal()">Click me to open Terminal</button>
+    <button onclick="createTerminal()" style="cursor: pointer;">Click me to open Terminal</button>
     <div>
         <div>
             <p style="color:#fff;"><b>U may also check my other projects</b></p>
             <div id="repos-frame"></div>
         </div>
-        <script src="static/js/movable.js"></script>
         <script src="static/js/index.js"></script>
+        <script src="static/js/terminal.js"></script>
+        <script src="static/js/onLoad.js"></script>
     </div>
 </body>
 </html>
